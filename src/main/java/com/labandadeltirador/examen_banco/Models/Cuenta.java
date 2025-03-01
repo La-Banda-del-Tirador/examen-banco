@@ -1,4 +1,4 @@
-package com.labandadeltirador.examen_banco.Entities;
+package com.labandadeltirador.examen_banco.Models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
