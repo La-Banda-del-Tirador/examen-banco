@@ -17,8 +17,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Cuenta {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 14, nullable = false, unique = true)
     private String nroCuenta;
     
