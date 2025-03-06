@@ -1,10 +1,11 @@
 package com.labandadeltirador.examen_banco.Models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -17,43 +18,24 @@ import lombok.NoArgsConstructor;
 public class Movimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // Identificador único para la transacción
 
     @ManyToOne
-    @JoinColumn(name = "cuenta_id", nullable = false)
-    private Cuenta cuenta;
+    @JoinColumn(name = "nro_cuenta", nullable = false)
+    private Cuenta cuenta; // Relación con la cuenta
 
-    @NotNull
     @Column(nullable = false)
-    private LocalDateTime fecha;
+    private LocalDateTime fecha; // Fecha de operación
 
-    @NotNull
-    @Size(max = 3)
-    @Column(length = 3, nullable = false)
-    private String tipo;
+    @Column(length = 1, nullable = false)
+    private String tipo; // Tipo de operación (D - Débito, A - Abono)
 
-    @NotNull
-    @Column(precision = 10, scale = 2, nullable = false)
-    private BigDecimal importe;
+    @Column(precision = 12, scale = 2, nullable = false)
+    private BigDecimal importe; // Importe de la operación
 
-    @Column(precision = 10, scale = 4)
-    private BigDecimal tipoCambio;
+    @Column(precision = 15, scale = 5, nullable = false)
+    private BigDecimal tipoCambio; // Tipo de cambio de la operación
 
-    @Size(max = 100)
-    @Column(length = 100)
-    private String glosa;
-
-    public Movimiento(Cuenta cuenta, LocalDateTime fecha, String tipo, BigDecimal importe, 
-                     BigDecimal tipoCambio, String glosa) {
-        if (cuenta == null || fecha == null || tipo == null || importe == null) {
-            throw new IllegalArgumentException("Los campos cuenta, fecha, tipo e importe no pueden ser null");
-        }
-        
-        this.cuenta = cuenta;
-        this.fecha = fecha;
-        this.tipo = tipo;
-        this.importe = importe;
-        this.tipoCambio = tipoCambio;
-        this.glosa = glosa;
-    }
+    @Column(length = 25)
+    private String glosa; // Glosa de la transacción
 }
